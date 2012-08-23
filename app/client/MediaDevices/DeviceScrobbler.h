@@ -29,13 +29,13 @@ signals:
     void foundScrobbles( const QList<lastfm::Track>& tracks, const QString& id );
 
 public slots:
-#ifdef Q_WS_X11
+#ifdef __linux__
     void onScrobbleIpodTriggered();
 #endif
 
 private slots:
     void onScrobbleSetupClicked( bool scrobble, bool alwaysAsk, QString username, QString deviceId, QString deviceName, QStringList iPodFiles );
-#ifdef Q_WS_X11
+#ifdef __linux__
     void onCalculatingScrobbles( int trackCount );
     void scrobbleIpodTracks( int trackCount );
     void onIpodScrobblingError();
@@ -47,7 +47,7 @@ public:
     void iPodDetected( const QStringList& arguments );
 
 private:
-#ifdef Q_WS_X11
+#ifdef __linux__
     QPointer<IpodDeviceLinux> iPod;
 #endif
     void twiddled( QStringList arguments );

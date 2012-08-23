@@ -1,8 +1,8 @@
 
 #include <QStringList>
 
-#include <../UnicornApplication.h>
-#include <../UnicornSettings.h>
+#include "../UnicornApplication.h"
+#include "../UnicornSettings.h"
 
 #include "Updater.h"
 

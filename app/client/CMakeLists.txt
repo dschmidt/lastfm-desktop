@@ -88,6 +88,21 @@ list(APPEND lastfm_SOURCES
 
 if(UNIX AND NOT APPLE)
     list(APPEND lastfm_SOURCES MediaDevices/IpodDevice_linux.cpp)
+elseif(APPLE)
+    list(APPEND lastfm_SOURCES
+        CommandReciever/CommandReciever.mm
+        Dialogs/CloseAppsDialog_mac.mm
+        Widgets/NothingPlayingWidget_mac.mm
+        MediaKeys/MediaKey.mm
+        Services/ITunesPluginInstaller/ITunesPluginInstaller_mac.cpp
+
+        # headers
+        Services/ITunesPluginInstaller/ITunesPluginInstaller.h
+
+#FIXME: should be an extra target
+        ../../lib/3rdparty/SPMediaKeyTap/SPMediaKeyTap.m
+        ../../lib/3rdparty/SPMediaKeyTap/SPInvocationGrabbing/NSObject+SPInvocationGrabbing.m
+    )
 endif()
 
 qt4_wrap_ui(lastfm_UI_SOURCES
@@ -129,15 +144,16 @@ list(APPEND lastfm_TARGETS
     ${QT_QTCORE_LIBRARY}
 
 #FIXME: use proper find modules
-    gpod
+#     gpod
     faad
     vorbisfile
     FLAC
     mp4ff
     mad
     z
-    /home/domme/dev/installs/lib64/liblastfm_fingerprint.so
-    /home/domme/dev/installs/lib64/libphonon.so
+
+    /usr/local/lib/liblastfm_fingerprint.dylib
+    /usr/local/Cellar/kde-phonon/4.6.0/lib/libphonon.4.6.0.dylib
 )
 
 include_directories(${lastfm_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR}
@@ -145,8 +161,8 @@ include_directories(${lastfm_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR}
 ${CMAKE_CURRENT_LIST_DIR}/Settings/
 
 #FIXME: use find module
-    /usr/include/gpod-1.0/
-    /usr/include/glib-2.0/ /usr/lib64/glib-2.0/include/
+#     /usr/include/gpod-1.0/
+#     /usr/include/glib-2.0/ /usr/lib64/glib-2.0/include/
 )
 
 add_executable(lastfm ${lastfm_SOURCES} ${lastfm_UI_SOURCES}  ${lastfm_RESOURCES})

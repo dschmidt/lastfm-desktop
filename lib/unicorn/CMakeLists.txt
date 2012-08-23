@@ -2,6 +2,8 @@
 # QT = core gui xml network
 # include( ../../admin/include.qmake )
 
+#FIXME: add checks for growl
+
 add_definitions( -D_UNICORN_DLLEXPORT -DLASTFM_COLLAPSE_NAMESPACE )
 add_definitions( -DAPI_KEY=\"${LASTFM_API_KEY}\" )
 add_definitions( -DAPI_SECRET=\"${LASTFM_API_SECRET}\" )
@@ -15,7 +17,7 @@ set(unicorn_INCLUDES
     ${LIBLASTFM_INCLUDE_DIRS}
 )
 
-set(unicorn_SOURCES
+list(APPEND unicorn_SOURCES
     dialogs/ShareDialog.cpp
     widgets/AvatarWidget.cpp
     layouts/FlowLayout.cpp
@@ -81,69 +83,7 @@ set(unicorn_SOURCES
     SignalBlocker.h
     PlayBus.h
 )
-# HEADERS += \
-#     widgets/UserToolButton.h \
-#     widgets/UserMenu.h \
-#     widgets/UserManagerWidget.h \
-#     widgets/UserComboSelector.h \
-#     widgets/UnicornTabWidget.h \
-#     widgets/TrackWidget.h \
-#     widgets/TagListWidget.h \
-#     widgets/TagBuckets.h \
-#     widgets/StatusLight.h \
-#     widgets/SpinnerLabel.h \
-#     widgets/Seed.h \
-#     widgets/SearchBox.h \
-#      \
-#     widgets/MessageBar.h \
-#     widgets/LfmListViewWidget.h \
-#     widgets/Label.h \
-#     widgets/ItemSelectorWidget.h \
-#     widgets/ImageButton.h \
-#     widgets/HttpImageWidget.h \
-#     widgets/GhostWidget.h \
-#     widgets/FriendsPicker.h \
-#     widgets/DataListWidget.h \
-#     widgets/DataBox.h \
-#     widgets/BannerWidget.h \
-#     widgets/ActionButton.h \
-#     UpdateInfoFetcher.h \
-#     UnicornSettings.h \
-#     UnicornSession.h \
-#     UnicornMainWindow.h \
-#     UnicornCoreApplication.h \
-#     UnicornApplication.h \
-#     TrackImageFetcher.h \
-#     SignalBlocker.h \
-#     ScrobblesModel.h \
-#     qtwin.h \
-#     qtsingleapplication/qtsinglecoreapplication.h \
-#     qtsingleapplication/qtsingleapplication.h \
-#     qtsingleapplication/qtlockedfile.h \
-#     qtsingleapplication/qtlocalpeer.h \
-#     QMessageBoxBuilder.h \
-#     PlayBus.h \
-#     LoginProcess.h \
-#     layouts/SlideOverLayout.h \
-#     layouts/SideBySideLayout.h \
-#     layouts/AnimatedListLayout.h \
-#     dialogs/UserManagerDialog.h \
-#     dialogs/UpdateDialog.h \
-#     dialogs/UnicornDialog.h \
-#     dialogs/TagDialog.h \
-#     dialogs/LoginDialog.h \
-#     dialogs/LoginContinueDialog.h \
-#     dialogs/AboutDialog.h \
-#     dialogs/ScrobbleConfirmationDialog.h \
-#     AnimatedStatusBar.h \
-#     AnimatedPushButton.h \
-#     dialogs/ShareDialog.h \
-#     widgets/AvatarWidget.h \
-#     layouts/FlowLayout.h \
-#     widgets/SlidingStackedWidget.h \
-#     Updater/Updater.h \
-#     DesktopServices.h \
-#     widgets/StackedWidget.h
+
 
 #FIXME: move to own target
 #win32:SOURCES += qtsingleapplication/qtlockedfile_win.cpp
@@ -158,6 +98,11 @@ if(APPLE)
     notify/Notify.mm
     Updater/Updater_mac.mm
     UnicornApplicationDelegate.mm
+
+    # headers
+#     mac/AppleScript.cpp
+#     notify/Notify.h
+#     UnicornApplicationDelegate.h
     )
 endif()
 
@@ -188,6 +133,23 @@ list(APPEND unicorn_TARGETS
     ${QT_QTGUI_LIBRARY}
     ${QT_QTCORE_LIBRARY}
 )
+
+if(APPLE)
+    find_library(GROWL_FRAMEWORK Growl)
+    list(APPEND unicorn_TARGETS ${GROWL_FRAMEWORK})
+
+    find_library(SPARKLE_FRAMEWORK Sparkle)
+    list(APPEND unicorn_TARGETS ${SPARKLE_FRAMEWORK})
+
+    find_library(CARBON_FRAMEWORK Carbon)
+    list(APPEND unicorn_TARGETS ${CARBON_FRAMEWORK})
+
+    find_library(FOUNDATION_FRAMEWORK Foundation)
+    list(APPEND unicorn_TARGETS ${FOUNDATION_FRAMEWORK})
+
+    find_library(APPKIT_FRAMEWORK AppKit)
+    list(APPEND unicorn_TARGETS ${APPKIT_FRAMEWORK})
+endif()
 
 qt4_add_resources(unicorn_RESOURCES qrc/unicorn.qrc)
 

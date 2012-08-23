@@ -13,6 +13,17 @@ if(UNIX AND NOT APPLE)
     list(APPEND listener_SOURCES DBusListener.cpp)
 endif()
 
+if(APPLE)
+    list(APPEND listener_SOURCES
+        mac/ITunesListener.cpp
+        mac/SpotifyListener.mm
+    )
+
+    find_library(APPKIT_FRAMEWORK AppKit)
+    list(APPEND listener_TARGETS ${APPKIT_FRAMEWORK})
+
+    list(APPEND listener_TARGETS unicorn)
+endif()
 
 list(APPEND listener_SOURCES
     PlayerMediator.cpp
@@ -21,18 +32,6 @@ list(APPEND listener_SOURCES
     PlayerCommandParser.cpp
     legacy/LegacyPlayerListener.cpp
 )
-
-
-# mac {
-#     SOURCES += mac/ITunesListener.cpp
-#
-#     OBJECTIVE_SOURCES += mac/SpotifyListener.mm
-#
-#     HEADERS += mac/ITunesListener.h \
-#                     mac/SpotifyListener.h
-#
-#     LIBS += -framework AppKit
-# }
 
 # win32 {
 #     SOURCES += win/SpotifyListener.cpp \
@@ -58,8 +57,6 @@ include_directories(${listener_INCLUDES})
 add_library(listener SHARED
     ${listener_SOURCES}
 )
-
-
 
 list(APPEND listener_TARGETS
     ${LIBLASTFM_LIBRARIES}
