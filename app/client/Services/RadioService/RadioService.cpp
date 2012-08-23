@@ -287,7 +287,8 @@ RadioService::mute()
 void
 RadioService::onPhononStateChanged( Phonon::State newstate, Phonon::State oldstate )
 {
-    qDebug() << oldstate << " -> " << newstate;
+//FIXME: error: ambiguous overload for ‘operator<<’ in ‘qDebug()() << oldstate’
+//     qDebug() << oldstate << " -> " << newstate;
     if (m_mediaObject == 0) {
         qDebug() << "m_mediaObject is null!";
         return;

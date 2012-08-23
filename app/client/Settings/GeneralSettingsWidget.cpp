@@ -58,8 +58,8 @@ GeneralSettingsWidget::GeneralSettingsWidget( QWidget* parent )
 
     ui->showAs->setChecked( unicorn::Settings().value( SETTING_SHOW_AS, ui->showAs->isChecked() ).toBool() );
     connect( ui->showAs, SIGNAL(stateChanged(int)), SLOT( onSettingsChanged() ) );
-
-    ui->hideDock->hide();
+//FIXME: hideDock doesnt exist?!
+//     ui->hideDock->hide();
 #endif
 
 #ifndef Q_WS_X11

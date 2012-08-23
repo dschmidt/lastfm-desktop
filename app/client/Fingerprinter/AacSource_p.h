@@ -19,6 +19,8 @@
 */
 
 #include <faad.h>
+
+#define HAVE_STDINT_H
 #include <mp4ff.h>
 
 class AAC_File

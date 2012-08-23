@@ -16,3 +16,4 @@ admin/dist/mac/dsa_priv.pem
 *.breakpad
 
 *.user
+*~

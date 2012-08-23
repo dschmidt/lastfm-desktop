@@ -18,7 +18,7 @@
    along with lastfm-desktop.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "Application.h"
+#include "../Application.h"
 #include "IpodDevice_linux.h"
 #include "lib/unicorn/QMessageBoxBuilder.h"
 #include "lib/unicorn/UnicornSettings.h"
