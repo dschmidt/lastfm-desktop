@@ -103,6 +103,11 @@ elseif(APPLE)
         ../../lib/3rdparty/SPMediaKeyTap/SPMediaKeyTap.m
         ../../lib/3rdparty/SPMediaKeyTap/SPInvocationGrabbing/NSObject+SPInvocationGrabbing.m
     )
+elseif(WIN32)
+    list(APPEND lastfm_SOURCES
+        Plugins/PluginList.cpp
+        Plugins/IPluginInfo.cpp
+    )
 endif()
 
 qt4_wrap_ui(lastfm_UI_SOURCES
@@ -152,8 +157,10 @@ list(APPEND lastfm_TARGETS
     mad
     z
 
-    /usr/local/lib/liblastfm_fingerprint.dylib
-    /usr/local/Cellar/kde-phonon/4.6.0/lib/libphonon.4.6.0.dylib
+#     /usr/local/lib/liblastfm_fingerprint.dylib
+#     /usr/local/Cellar/kde-phonon/4.6.0/lib/libphonon.4.6.0.dylib
+    lastfm_fingerprint
+    phonon
 )
 
 include_directories(${lastfm_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR}

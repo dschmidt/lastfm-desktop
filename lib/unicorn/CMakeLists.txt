@@ -55,7 +55,6 @@ list(APPEND unicorn_SOURCES
 #FIXME: move to 3rdparty and make own target
     qtsingleapplication/qtsinglecoreapplication.cpp
     qtsingleapplication/qtsingleapplication.cpp
-    qtsingleapplication/qtlockedfile_unix.cpp
     qtsingleapplication/qtlockedfile.cpp
     qtsingleapplication/qtlocalpeer.cpp
 
@@ -86,7 +85,11 @@ list(APPEND unicorn_SOURCES
 
 
 #FIXME: move to own target
-#win32:SOURCES += qtsingleapplication/qtlockedfile_win.cpp
+if(UNIX)
+    list(APPEND unicorn_SOURCES qtsingleapplication/qtlockedfile_unix.cpp)
+elseif(WIN32)
+    list(APPEND unicorn_SOURCES qtsingleapplication/qtlockedfile_win.cpp)
+endif()
 
 if(APPLE)
     list(APPEND unicorn_SOURCES
@@ -149,6 +152,10 @@ if(APPLE)
 
     find_library(APPKIT_FRAMEWORK AppKit)
     list(APPEND unicorn_TARGETS ${APPKIT_FRAMEWORK})
+endif()
+
+if(WIN32)
+    list(APPEND unicorn_TARGETS user32 shell32 ole32)
 endif()
 
 qt4_add_resources(unicorn_RESOURCES qrc/unicorn.qrc)

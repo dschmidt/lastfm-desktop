@@ -6,7 +6,7 @@
 
 #ifdef WIN32
 #include <windows.h>
-#include <Shlobj.h>
+#include <shlobj.h>
 #endif
 
 class Version

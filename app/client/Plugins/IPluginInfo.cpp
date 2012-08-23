@@ -6,8 +6,8 @@
 #include <QDebug>
 
 #include <windows.h>
-#include <Shellapi.h>
-#include <Wtsapi32.h>
+#include <shellapi.h>
+#include <wtsapi32.h>
 
 #include "lib/unicorn/UnicornSettings.h"
 

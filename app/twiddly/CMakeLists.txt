@@ -27,6 +27,16 @@ if(APPLE)
     )
 endif()
 
+if(WIN32)
+    list(APPEND twiddly_SOURCES
+        ITunesLibrary_win.cpp
+        ${LASTFM_SOURCE_DIR}/plugins/iTunes/ITunesTrack.cpp
+#         ITunesComWrapper.cpp
+        #${LASTFM_SOURCE_DIR}/plugins/scrobsub/EncodingUtils.cpp
+        #${LASTFM_SOURCE_DIR}/lib/3rdparty/iTunesCOMAPI/iTunesCOMInterface_i.c
+    )
+endif()
+
 list(APPEND twiddly_TARGETS
 # internal targets
     unicorn

@@ -53,8 +53,8 @@ public:
     // Copy ctor (needed because of owned COM pointer)
     ITunesTrack( const ITunesTrack& that );
     ITunesTrack& operator=( const ITunesTrack& that );
-    
-    ITunesTrack::~ITunesTrack();
+
+    ~ITunesTrack();
 
     /** Unicode */
     std::wstring track() const;

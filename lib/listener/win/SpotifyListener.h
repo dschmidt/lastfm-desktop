@@ -20,7 +20,7 @@
 #ifndef SPOTIFY_LISTENER_H
 #define SPOTIFY_LISTENER_H
 
-#include <Windows.h>
+#include <windows.h>
 
 #include <QObject>
 #include <QPointer>

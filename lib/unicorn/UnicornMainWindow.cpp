@@ -33,7 +33,7 @@
 #include "lib/unicorn/DesktopServices.h"
 
 #ifdef Q_OS_WIN32
-#include <Objbase.h>
+#include <objbase.h>
 #endif
 
 #define SETTINGS_POSITION_KEY "MainWindowPosition"
@@ -80,12 +80,13 @@ unicorn::MainWindow::winEvent(MSG* message, long* result)
 {
     if ( message->message == taskBarCreatedMessage)
     {
-
-
+        const GUID IID_ITaskbarList3 = { 0xea1afb91,0x9e28,0x4b86,{0x90,0xe9,0x9e,0x9f,0x8a,0x5e,0xef,0xaf}};
         HRESULT hr = CoCreateInstance(CLSID_TaskbarList,
                                       0,
                                       CLSCTX_INPROC_SERVER,
-                                      IID_PPV_ARGS( &taskbar));
+                                      IID_ITaskbarList3,
+                                      (void **)( &taskbar));
+
         if (hr == S_OK)
         {
             m_thumbButtonActions.clear();

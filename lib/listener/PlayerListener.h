@@ -50,30 +50,30 @@ public:
 signals:
     void newConnection( class PlayerConnection* );
     void bootstrapCompleted( const QString& playerId );
-#ifdef Q_OS_WIN
+// #ifdef Q_OS_WIN
     void pipeConnected();
-#endif
+// #endif
 
 private slots:
     void onNewConnection();
     void onDataReady();
 
-#ifdef Q_OS_WIN
+// #ifdef Q_OS_WIN
     void onPipeConnected();
-#endif
+// #endif
 
 private:
     QString processLine( const QString& line );
-#ifdef Q_OS_WIN
+// #ifdef Q_OS_WIN
 
     bool addListener();
 
     static VOID CALLBACK onConnectedNamedPipe( PVOID lpParameter, BOOLEAN TimerOrWaitFired );
     static VOID CALLBACK onReadFileComplete( DWORD dwErrorCode, DWORD dwNumberOfBytesTransfered, LPOVERLAPPED lpOverlapped );
     static VOID CALLBACK onWriteFileComplete( DWORD dwErrorCode, DWORD dwNumberOfBytesTransfered, LPOVERLAPPED lpOverlapped );
-#endif
+// #endif
 
-private:    
+private:
     QMap<QString, PlayerConnection*> m_connections;
 #ifdef Q_OS_WIN
     HANDLE m_connectEvent;

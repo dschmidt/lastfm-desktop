@@ -27,7 +27,7 @@
 #define _WIN32_WINNT 0x0500
 
 #include "windows.h"
-#include "Sddl.h"       // for ConvertSidToString (_WIN32_WINNT = 0x0500)
+#include "sddl.h"       // for ConvertSidToString (_WIN32_WINNT = 0x0500)
 #include <string>
 #include <sstream>
 #include <iomanip>

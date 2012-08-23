@@ -1,5 +1,5 @@
 
-add_definitions( -D_LOGGER_DLLEXPORT -DLASTFM_COLLAPSE_NAMESPACE)
+add_definitions( -D_LISTENER_DLLEXPORT -DLASTFM_COLLAPSE_NAMESPACE)
 
 
 list(APPEND listener_INCLUDES ${LIBLASTFM_INCLUDE_DIRS})
@@ -23,6 +23,10 @@ if(APPLE)
     list(APPEND listener_TARGETS ${APPKIT_FRAMEWORK})
 
     list(APPEND listener_TARGETS unicorn)
+endif()
+
+if(WIN32)
+    list(APPEND listener_SOURCES win/SpotifyListener.cpp)
 endif()
 
 list(APPEND listener_SOURCES

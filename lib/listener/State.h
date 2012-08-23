@@ -22,7 +22,7 @@
 
 enum State
 {
-    Unknown,
+    StateUnknown,
     Stopped,
     TuningIn,
     Buffering,
@@ -37,7 +37,7 @@ inline QDebug operator<<( QDebug d, State state )
     #define _( x ) x: return d << #x
 	switch (state)
 	{
-        case _(Unknown);
+        case _(StateUnknown);
 		case _(Stopped);
 		case _(TuningIn);
 		case _(Playing);
